@@ -1,0 +1,32 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "maladiescardiaques"
+version = "0.0.1"
+description = "Les maladies cardiovasculaires sont la premi\u00e8re cause de d\u00e9c\u00e8s dans le monde, faisant environ 17,9 millions de morts chaque ann\u00e9e, ce qui repr\u00e9sente 31 % de tous les d\u00e9c\u00e8s dans le monde. Quatre d\u00e9c\u00e8s sur 5 par MCV sont dus \u00e0 des crises cardiaques et \u00e0 des accidents vasculaires c\u00e9r\u00e9braux, et un tiers de ces d\u00e9c\u00e8s surviennent pr\u00e9matur\u00e9ment chez des personnes de moins de 70 ans. L'insuffisance cardiaque est un \u00e9v\u00e9nement courant caus\u00e9 par les maladies cardiovasculaires."
+authors = [
+  { name = "Sebastien" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+requires-python = "~=3.10.0"
+
+
+[tool.ruff]
+line-length = 99
+src = ["maladiescardiaques"]
+include = ["pyproject.toml", "maladiescardiaques/**/*.py"]
+
+[tool.ruff.lint]
+extend-select = ["I"]  # Add import sorting
+
+[tool.ruff.lint.isort]
+known-first-party = ["maladiescardiaques"]
+force-sort-within-sections = true
+
