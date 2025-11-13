@@ -18,11 +18,11 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report, f1_score, accuracy_score
 
 # Importation des fonctions de prétraitement des données
-from maladiescardiaques.traitementDonnées import load_and_split_data, create_preprocessing_pipeline
+from traitementDonnées import load_and_split_data, create_preprocessing_pipeline
 
 
 # Force la sortie standard en UTF-8, même sous Windows
-sys.stdout.reconfigure(encoding='utf-8')
+#sys.stdout.reconfigure(encoding='utf-8')
 
 # =============================================================================
 # 1. CONFIGURATION DES MODÈLES ET HYPER-PARAMÈTRES

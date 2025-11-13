@@ -6,8 +6,9 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import sys
 
-# Force la sortie standard en UTF-8, même sous Windows
-sys.stdout.reconfigure(encoding='utf-8')
+# Force la sortie standard en UTF-8, même sous Windows 
+# sys.stdout.reconfigure(encoding='utf-8')
+# Mis en commentaire pour compatibilité avec jupyter
 
 # =============================================================================
 # 1. Définition des Caractéristiques (basé sur l'EDA)
