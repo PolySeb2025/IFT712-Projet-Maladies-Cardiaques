@@ -4,6 +4,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+import sys
+
+# Force la sortie standard en UTF-8, même sous Windows
+sys.stdout.reconfigure(encoding='utf-8')
 
 # =============================================================================
 # 1. Définition des Caractéristiques (basé sur l'EDA)
@@ -43,14 +47,33 @@ CATEGORICAL_FEATURES = [
 
 def load_and_split_data(data_path: Path, test_size=0.2, random_state=42):
     """
-    Charge les données brutes et les divise en ensembles d'entraînement et de test
-    pour éviter toute fuite de données.
+    Charge les données, gère l'index, encode la cible en 0/1, 
+    et divise en ensembles d'entraînement et de test.
     """
     try:
         df = pd.read_csv(data_path)
     except FileNotFoundError:
         print(f"Erreur : Fichier non trouvé à {data_path}")
         return None
+    
+    # 1. Gérer l'index (la première colonne non nommée)
+    # Le CSV a un index (ex: "1,63,female...") qui devient 'Unnamed: 0'
+    # On le supprime pour ne pas l'inclure dans les features (X)
+    if 'Unnamed: 0' in df.columns:
+        df = df.drop(columns=['Unnamed: 0'], errors='ignore')
+
+    # 2. Encoder la variable cible (le cœur de l'erreur)
+    # Convertir 'no disease' -> 0 et 'disease' -> 1
+    mapping = {'no disease': 0, 'disease': 1}
+    df[TARGET_COL] = df[TARGET_COL].map(mapping)
+    
+    # Vérification
+    if df[TARGET_COL].isnull().any():
+         print("ATTENTION : Des valeurs NaN sont apparues dans la cible après encodage.")
+         print("Vérifiez que les noms 'no disease' et 'disease' sont corrects.")
+         df = df.dropna(subset=[TARGET_COL])
+            
+    print(f"Variable cible '{TARGET_COL}' encodée. Valeurs uniques : {df[TARGET_COL].unique()}")
     
     # Séparer les caractéristiques (X) et la cible (y)
     # Nous retirons la cible ET l'ID des caractéristiques
