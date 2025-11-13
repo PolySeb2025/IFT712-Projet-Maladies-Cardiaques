@@ -137,14 +137,13 @@ def create_preprocessing_pipeline():
 # =============================================================================
 
 if __name__ == '__main__':
-    # Ce code s'exécute SEULEMENT si vous faites 'python src/data_processor.py'
 
-    DATA_FILE_PATH = Path("data") / "raw" / "cardiaque.csv"
-
-    print("--- Test du module data_processor.py ---")
+    # On remonte de 1 niveau car on est dans maladiescardiaques/
+    PROJECT_ROOT = Path(__file__).resolve().parents[1]
+    DATA_PATH = PROJECT_ROOT / "data" / "raw" / "cardiaque.csv" 
     
-    # Étape 1: Charger et diviser
-    data = load_and_split_data(DATA_FILE_PATH.resolve())
+    print("--- CHARGEMENT DES DONNÉES ---")
+    data = load_and_split_data(DATA_PATH)
     
     if data:
         X_train, X_test, y_train, y_test = data

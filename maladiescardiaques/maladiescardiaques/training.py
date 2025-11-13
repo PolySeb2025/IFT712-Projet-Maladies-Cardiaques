@@ -18,7 +18,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import classification_report, f1_score, accuracy_score
 
 # Importation des fonctions de prétraitement des données
-from traitementDonnées import load_and_split_data, create_preprocessing_pipeline
+from maladiescardiaques.traitementDonnées import load_and_split_data, create_preprocessing_pipeline
 
 
 # Force la sortie standard en UTF-8, même sous Windows
@@ -156,10 +156,12 @@ def train_and_evaluate_models(X_train, y_train):
 # =============================================================================
 if __name__ == '__main__':
 
-    DATA_FILE_PATH = Path("data") / "raw" / "cardiaque.csv"
+    # On remonte de 1 niveau car on est dans maladiescardiaques/
+    PROJECT_ROOT = Path(__file__).resolve().parents[1]
+    DATA_PATH = PROJECT_ROOT / "data" / "raw" / "cardiaque.csv" 
     
     print("--- CHARGEMENT DES DONNÉES ---")
-    data = load_and_split_data(DATA_FILE_PATH.resolve())
+    data = load_and_split_data(DATA_PATH)
     
     if data:
         X_train, X_test, y_train, y_test = data
