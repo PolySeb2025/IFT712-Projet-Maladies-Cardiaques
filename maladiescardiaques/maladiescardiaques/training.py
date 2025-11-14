@@ -23,6 +23,7 @@ from traitementDonnées import load_and_split_data, create_preprocessing_pipelin
 
 # Force la sortie standard en UTF-8, même sous Windows
 #sys.stdout.reconfigure(encoding='utf-8')
+# Commentaire car problème avec notebooks
 
 # =============================================================================
 # 1. CONFIGURATION DES MODÈLES ET HYPER-PARAMÈTRES
